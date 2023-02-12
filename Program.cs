@@ -43,7 +43,16 @@ namespace ToDo
 
             // Read line
             string optionSelected = Console.ReadLine();
-            return (Menu)Convert.ToInt32(optionSelected);
+            Menu _optionSelected = 0;
+            try
+            {
+				_optionSelected = (Menu)Convert.ToInt32(optionSelected);
+			}
+			catch
+			{
+				Console.WriteLine("Hubo un error seleccionando el menu");
+			}
+            return _optionSelected;
         }
 
         public static void ShowMenuRemove()
@@ -58,15 +67,22 @@ namespace ToDo
                 string taskIndexSelected = Console.ReadLine();
                 // Remove one position
                 int indexToRemove = Convert.ToInt32(taskIndexSelected) - 1;
-                if ((indexToRemove > -1) && (TaskList.Count > 0))
-                {
-					string task = TaskList[indexToRemove];
-					TaskList.RemoveAt(indexToRemove);
-					Console.WriteLine("Tarea " + task + " eliminada");
-                }
+                if (indexToRemove >= TaskList.Count || indexToRemove < 0)
+					Console.WriteLine("El indice se sale del rango de tareas");
+				else
+				{
+					if (TaskList.Count > 0)
+					{
+						string task = TaskList[indexToRemove];
+						TaskList.RemoveAt(indexToRemove);
+						Console.WriteLine("Tarea " + task + " eliminada");
+					}
+				}
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+				Console.WriteLine("Ha ocurrido un error eliminando la tarea");
+				Console.WriteLine(ex.Message);
             }
         }
 
@@ -81,6 +97,7 @@ namespace ToDo
             }
             catch (Exception)
             {
+				Console.WriteLine("Ha ocurrido un error agregando la tarea");
             }
         }
 

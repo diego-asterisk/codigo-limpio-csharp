@@ -14,18 +14,18 @@ namespace ToDo
             do
             {
                 userOptionSelected = ShowMainMenu();
-                if (userOptionSelected == Menu.Add)
+                switch(userOptionSelected)
                 {
-                    ShowMenuAdd();
-                }
-                else if (userOptionSelected == Menu.Remove)
-                {
-                    ShowMenuRemove();
-                }
-                else if (userOptionSelected == Menu.List)
-                {
-                    ShowMenuList();
-                }
+					case Menu.Add:
+						ShowMenuAdd();
+						break;
+					case Menu.Remove:
+						ShowMenuRemove();
+						break;
+					case Menu.List:
+						ShowMenuList();
+						break;					
+				}
             } while (userOptionSelected != Menu.Exit);
         }
         /// <summary>
@@ -58,14 +58,11 @@ namespace ToDo
                 string taskIndexSelected = Console.ReadLine();
                 // Remove one position
                 int indexToRemove = Convert.ToInt32(taskIndexSelected) - 1;
-                if (indexToRemove > -1)
+                if ((indexToRemove > -1) && (TaskList.Count > 0))
                 {
-                    if (TaskList.Count > 0)
-                    {
-                        string task = TaskList[indexToRemove];
-                        TaskList.RemoveAt(indexToRemove);
-                        Console.WriteLine("Tarea " + task + " eliminada");
-                    }
+					string task = TaskList[indexToRemove];
+					TaskList.RemoveAt(indexToRemove);
+					Console.WriteLine("Tarea " + task + " eliminada");
                 }
             }
             catch (Exception)
@@ -102,10 +99,8 @@ namespace ToDo
         }
         public static void ShowMenuTask()
         {
-			for (int i = 0; i < TaskList.Count; i++)
-			{
-				Console.WriteLine((i + 1) + ". " + TaskList[i]);
-			}
+			int index = 0;
+			TaskList.ForEach( tarea => Console.WriteLine((index++ + 1) + ". " + tarea));
 		}
         public enum Menu{
 			// agregamos los valores para coincidir con el menu impreso

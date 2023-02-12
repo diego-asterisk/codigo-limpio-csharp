@@ -10,29 +10,29 @@ namespace ToDo
         static void Main(string[] args)
         {
             TaskList = new List<string>();
-            int userOptionSelected = 0;
+            Menu userOptionSelected = 0;
             do
             {
                 userOptionSelected = ShowMainMenu();
-                if (userOptionSelected == 1)
+                if (userOptionSelected == Menu.Add)
                 {
                     ShowMenuAdd();
                 }
-                else if (userOptionSelected == 2)
+                else if (userOptionSelected == Menu.Remove)
                 {
                     ShowMenuRemove();
                 }
-                else if (userOptionSelected == 3)
+                else if (userOptionSelected == Menu.List)
                 {
                     ShowMenuList();
                 }
-            } while (userOptionSelected != 4);
+            } while (userOptionSelected != Menu.Exit);
         }
         /// <summary>
         /// Show the main menu 
         /// </summary>
         /// <returns>Returns option indicated by user</returns>
-        public static int ShowMainMenu()
+        public static Menu ShowMainMenu()
         {
             Console.WriteLine("----------------------------------------");
             Console.WriteLine("Ingrese la opción a realizar: ");
@@ -43,7 +43,7 @@ namespace ToDo
 
             // Read line
             string optionSelected = Console.ReadLine();
-            return Convert.ToInt32(optionSelected);
+            return (Menu)Convert.ToInt32(optionSelected);
         }
 
         public static void ShowMenuRemove()
@@ -106,5 +106,12 @@ namespace ToDo
                 Console.WriteLine("----------------------------------------");
             }
         }
+        public enum Menu{
+			// agregamos los valores para coincidir con el menu impreso
+			Add = 1,
+			List = 3,
+			Remove =2,
+			Exit = 4
+		}
     }
 }

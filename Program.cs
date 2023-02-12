@@ -39,7 +39,6 @@ internal class Program
 		Console.WriteLine("3. Tareas pendientes");
 		Console.WriteLine("4. Salir");
 
-		// Read line
 		string optionSelected = Console.ReadLine();
 		Menu _optionSelected = 0;
 		try
@@ -58,12 +57,11 @@ internal class Program
 		try
 		{
 			Console.WriteLine("Ingrese el número de la tarea a remover: ");
-			// Show current taks
 			ShowMenuTask();
 			Console.WriteLine(Linea);
 
 			string taskIndexSelected = Console.ReadLine();
-			// Remove one position
+			// Remove the zero position of array because it is first
 			int indexToRemove = Convert.ToInt32(taskIndexSelected) - 1;
 			if (indexToRemove >= TaskList.Count || indexToRemove < 0)
 				Console.WriteLine("El indice se sale del rango de tareas");

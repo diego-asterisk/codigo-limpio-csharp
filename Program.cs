@@ -34,7 +34,7 @@ namespace ToDo
         /// <returns>Returns option indicated by user</returns>
         public static Menu ShowMainMenu()
         {
-            Console.WriteLine("----------------------------------------");
+            Console.WriteLine(Linea);
             Console.WriteLine("Ingrese la opción a realizar: ");
             Console.WriteLine("1. Nueva tarea");
             Console.WriteLine("2. Remover tarea");
@@ -52,11 +52,8 @@ namespace ToDo
             {
                 Console.WriteLine("Ingrese el número de la tarea a remover: ");
                 // Show current taks
-                for (int i = 0; i < TaskList.Count; i++)
-                {
-                    Console.WriteLine((i + 1) + ". " + TaskList[i]);
-                }
-                Console.WriteLine("----------------------------------------");
+				ShowMenuTask();
+                Console.WriteLine(Linea);
 
                 string taskIndexSelected = Console.ReadLine();
                 // Remove one position
@@ -98,14 +95,18 @@ namespace ToDo
             } 
             else
             {
-                Console.WriteLine("----------------------------------------");
-                for (int i = 0; i < TaskList.Count; i++)
-                {
-                    Console.WriteLine((i + 1) + ". " + TaskList[i]);
-                }
-                Console.WriteLine("----------------------------------------");
+                Console.WriteLine(Linea);
+                ShowMenuTask();
+                Console.WriteLine(Linea);
             }
         }
+        public static void ShowMenuTask()
+        {
+			for (int i = 0; i < TaskList.Count; i++)
+			{
+				Console.WriteLine((i + 1) + ". " + TaskList[i]);
+			}
+		}
         public enum Menu{
 			// agregamos los valores para coincidir con el menu impreso
 			Add = 1,
@@ -113,5 +114,6 @@ namespace ToDo
 			Remove =2,
 			Exit = 4
 		}
+		const string Linea = "----------------------------------------";
     }
 }
